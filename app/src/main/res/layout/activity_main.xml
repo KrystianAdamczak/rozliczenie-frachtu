@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Witaj!"
+        android:layout_gravity="center"
+        android:textSize="46dp"
+        android:layout_marginTop="70dp"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Naciśnij przycisk, aby przejść do rozliczenia frachtu"
+        android:layout_gravity="center"
+        android:textSize="16dp"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/rozlicz_button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Rozlicz fracht"
+        android:layout_marginTop="70dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:onClick="navigateToKalkulator"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/logo" />
+
+
+</LinearLayout>
