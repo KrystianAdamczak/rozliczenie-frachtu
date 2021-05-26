@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".about"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="O aplikacji"
+        android:layout_gravity="center"
+        android:textSize="26dp"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Twórcą aplikacji jest Krystian Adamczak nr indeksu 28824. Aplikacja „Rozliczenie frachtu –spedytor” umożliwia spedytorowi obliczenia wysokości wypłaty spedytora na podstawie obrotu netto, ilości kilometrów spedycyjnych oraz ilości dni roboczych danego auta w trasie."
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Wynagrodzenie liczone jest na podstawie sumy pól: korekta podstawy, korekta podstawy z tytułu niewykonania normy, korekta podstawy z tytułu przekroczenia limitu km
+spedycyjnych, premia za wykonanie obrotu oraz korekta premii z tytułu przekroczenia limitu km spedycyjnych. W celu zaczerpnięcia dalszych informacji skontaktuj się z twórcą
+aplikacji."
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Instrukcja"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:textSize="26dp"/>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dane należy wpisywać w pola oznaczone kolorem szarym. Aplikacja automatycznie oblicza pozostałe dane i wyświetla je w odpowiednich polach."
+        android:gravity="center"/>
+
+</LinearLayout>

@@ -68,14 +68,21 @@ public class kalkulator extends AppCompatActivity{
 
             @Override
             public void afterTextChanged(Editable s) {
-                dPlanNetto = Double.parseDouble(iloscDniRoboczych.getText().toString())*320;
-                dPlanKmSped = Double.parseDouble(iloscDniRoboczych.getText().toString())*651;
+                try{
+                    dPlanNetto = Double.parseDouble(iloscDniRoboczych.getText().toString()) * 320;
+                    dPlanKmSped = Double.parseDouble(iloscDniRoboczych.getText().toString()) * 651;
 
 
-                planNetto.setText(Double.toString(dPlanNetto));
-                planKmSpedycyjne.setText(Double.toString(dPlanKmSped));
+                    planNetto.setText(Double.toString(dPlanNetto));
+                    planKmSpedycyjne.setText(Double.toString(dPlanKmSped));
+                }catch (Exception e){
+                    System.out.println("Błąd danych!");
+                }
 
-            }
+
+
+                }
+
         });
 
         wykonanieKmSpedycyjne.addTextChangedListener(new TextWatcher() {
@@ -91,54 +98,58 @@ public class kalkulator extends AppCompatActivity{
 
             @Override
             public void afterTextChanged(Editable s) {
-                dWykKmSped = Double.parseDouble(wykonanieKmSpedycyjne.getText().toString());
+                try {
+                    dWykKmSped = Double.parseDouble(wykonanieKmSpedycyjne.getText().toString());
 
-                if(dWykKmSped > dPlanKmSped)
-                    planKmSpedycyjneDzien.setText("TAK");
-                else
-                    planKmSpedycyjneDzien.setText("NIE");
-
-                //wykonanieKmSpedycyjneDzien.setText(Double.toString(dWykKmSped / Double.parseDouble(iloscDniRoboczych.getText().toString())));
-                wykonanieKmSpedycyjneDzien.setText(Double.toString(dWykKmSped));
-                dStawkaKmSped = Double.parseDouble(wykonanieNetto.getText().toString()) / dWykKmSped;
-                stawkaKmSpedycyjne.setText(String.format("%.2f", dStawkaKmSped));
-
-                dIloscDniRoboczych = Double.parseDouble(iloscDniRoboczych.getText().toString());
-
-                if(!stawkaKmSpedycyjne.getText().toString().isEmpty()) {
-                    if (Double.parseDouble(stawkaKmSpedycyjne.getText().toString()) > 0.49)
-                        do045.setText(String.format("%.2f",(Double.parseDouble(iloscDniRoboczych.getText().toString()) / 15) * 1000));
+                    if (dWykKmSped > dPlanKmSped)
+                        planKmSpedycyjneDzien.setText("TAK");
                     else
-                        do045.setText(String.format("%.2f",((dStawkaKmSped-0.49)*1000)+((dIloscDniRoboczych/15)*1000)));
+                        planKmSpedycyjneDzien.setText("NIE");
+
+                    //wykonanieKmSpedycyjneDzien.setText(Double.toString(dWykKmSped / Double.parseDouble(iloscDniRoboczych.getText().toString())));
+                    wykonanieKmSpedycyjneDzien.setText(Double.toString(dWykKmSped));
+                    dStawkaKmSped = Double.parseDouble(wykonanieNetto.getText().toString()) / dWykKmSped;
+                    stawkaKmSpedycyjne.setText(String.format("%.2f", dStawkaKmSped));
+
+                    dIloscDniRoboczych = Double.parseDouble(iloscDniRoboczych.getText().toString());
+
+                    if (!stawkaKmSpedycyjne.getText().toString().isEmpty()) {
+                        if (Double.parseDouble(stawkaKmSpedycyjne.getText().toString()) > 0.49)
+                            do045.setText(String.format("%.2f", (Double.parseDouble(iloscDniRoboczych.getText().toString()) / 15) * 1000));
+                        else
+                            do045.setText(String.format("%.2f", ((dStawkaKmSped - 0.49) * 1000) + ((dIloscDniRoboczych / 15) * 1000)));
+                    }
+
+                    if (dStawkaKmSped > 0.44)
+                        korektaPodstawy.setText(do045.getText());
+                    else
+                        korektaPodstawy.setText(0);
+
+                    dWykNetto = Double.parseDouble(wykonanieNetto.getText().toString());
+
+                    if (dPlanNetto < dWykNetto)
+                        premia2.setText(String.format("%.2f", (((dWykNetto - dPlanNetto) * Double.parseDouble(premia1.getText().toString()) * 0.4))));
+                    else
+                        premia2.setText("0");
+
+                    if (dStawkaKmSped >= 0.405)
+                        premia3.setText(premia2.getText());
+                    else
+                        premia3.setText("0");
+
+                    double podstawaKmSped = obliczPodstaweKmSped(dPlanKmSped, Double.parseDouble(wykonanieKmSpedycyjne.getText().toString()),
+                            Double.parseDouble(korektaPodstawy.getText().toString()));
+                    double premiaKmSped = obliczPremieKmSped(dPlanKmSped, Double.parseDouble(wykonanieKmSpedycyjne.getText().toString()),
+                            Double.parseDouble(premia3.getText().toString()));
+                    double niewykonanieNormy = niewykonanieNormy(dWykNetto, dPlanNetto, Double.parseDouble(korektaPodstawy.getText().toString()));
+
+                    double dWynagrodzenie = obliczWynagrodzenie(Double.parseDouble(korektaPodstawy.getText().toString()), niewykonanieNormy, podstawaKmSped,
+                            Double.parseDouble(premia3.getText().toString()), premiaKmSped);
+
+                    wynagrodzenie.setText(String.format("%.2f", dWynagrodzenie));
+                } catch(Exception e){
+                    System.out.println("Błąd danych! 2");
                 }
-
-                if(dStawkaKmSped > 0.44)
-                    korektaPodstawy.setText(do045.getText());
-                else
-                    korektaPodstawy.setText(0);
-
-                dWykNetto = Double.parseDouble(wykonanieNetto.getText().toString());
-
-                if(dPlanNetto < dWykNetto)
-                    premia2.setText(String.format("%.2f", (((dWykNetto-dPlanNetto)*Double.parseDouble(premia1.getText().toString())*0.4))));
-                else
-                    premia2.setText("0");
-
-                if(dStawkaKmSped>=0.405)
-                    premia3.setText(premia2.getText());
-                else
-                    premia3.setText("0");
-
-                double podstawaKmSped = obliczPodstaweKmSped(dPlanKmSped, Double.parseDouble(wykonanieKmSpedycyjne.getText().toString()),
-                        Double.parseDouble(korektaPodstawy.getText().toString()));
-                double premiaKmSped = obliczPremieKmSped(dPlanKmSped,  Double.parseDouble(wykonanieKmSpedycyjne.getText().toString()),
-                        Double.parseDouble(premia3.getText().toString()));
-                double niewykonanieNormy = niewykonanieNormy(dWykNetto, dPlanNetto, Double.parseDouble(korektaPodstawy.getText().toString()));
-
-                double dWynagrodzenie = obliczWynagrodzenie(Double.parseDouble(korektaPodstawy.getText().toString()), niewykonanieNormy, podstawaKmSped,
-                        Double.parseDouble(premia3.getText().toString()), premiaKmSped);
-
-                wynagrodzenie.setText(String.format("%.2f", dWynagrodzenie));
             }
 
         });
@@ -196,5 +207,7 @@ public class kalkulator extends AppCompatActivity{
     1. PO WPISANIU I USUNIECIU WARTOSCI WYRZUCA APLIKACJE -> AFTERTEXTCHANGED;
     2. PRZYCISK RESET;
     3. KOSMETYCZNE ZMIANY
+    4. AUTOR I LICENCJA
+    5. INSTRUKCJA DLA UŻYTKOWNIKA
      */
 }

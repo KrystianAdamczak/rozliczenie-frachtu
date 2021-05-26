@@ -9,13 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".kalkulator"
-            android:theme="@style/MyAppTheme"
+        <activity android:name=".license"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".MainActivity"
-            />
-
+            android:theme="@style/MyAppTheme"></activity>
+        <activity
+            android:name=".about"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/MyAppTheme"
+            ></activity>
+        <activity
+            android:name=".kalkulator"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/MyAppTheme" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
